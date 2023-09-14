@@ -1,0 +1,2 @@
+Computed in 1783779 nanoseconds
+Time/Pixel: 98 nanoseconds

@@ -1,0 +1,86 @@
+Homework 3: Locality
+By: Hannah Shader and Aidan Banerjee
+
+The CS40 TAs:
+        - Alan
+        - Zane
+        - Cece
+        - Tina
+        - Rohun
+        - Male long hair TA with the kind eyes
+
+All aspects have been correctly implemented and throuroughly tested
+
+Architecture: 
+The program relies on two abstracted representations of 2D Uarrays: UArray2
+and UArray2b which are populated and accessed with row/column major mapping or 
+block-major mapping. Both UArrays make use of Hansons UArray interface. The 
+2D Arrays are abstracted into one interface A2Methods which is used to populate
+and iterate through or change the arrays. For the main part of the program, an
+implementation called ppmtrans was used to take in images and apply rotations 
+or flips to them. In ppmtrans, images were accessed and mapped onto 2D arrays
+using a provided pnm interface and the A2methods interface. 
+
+Performance: 
+
+We used the provided mobo.ppm to time the various transformations.
+This file is 149817617 bytes.
+These tranformations were done on a MacBook Air (M2, 2022).  
+The CPU is a 8-core M2 processor, and runs at 3.49GHz.
+
+Block major mapping:
+
+0 degree 
+Computed in 4498885694 nanoseconds
+Time/Pixel: 90 nanoseconds (approx 90 instructions)
+
+90 degree
+Computed in 5717376739 nanoseconds
+Time/Pixel: 114 nanoseconds (approx 114 instructions)
+
+180 degree
+Computed in 5158787972 nanoseconds
+Time/Pixel: 103 nanoseconds (approx 103 instructions)
+
+Row major mapping:
+
+0 degree 
+Computed in 1715752519 nanoseconds
+Time/Pixel: 34 nanoseconds (approx 34 instructions)
+
+90 degree 
+Computed in 5128364188 nanoseconds
+Time/Pixel: 103 nanoseconds (approx 103 instructions)
+
+180 degree
+Computed in 2276979738 nanoseconds
+Time/Pixel: 46 nanoseconds (approx 46 instructions)
+
+Col major mapping:
+
+0 degree 
+Computed in 6481961998 nanoseconds
+Time/Pixel: 130 nanoseconds (approx 130 instructions)
+
+90 degree 
+Computed in 5638224982 nanoseconds
+Time/Pixel: 113 nanoseconds (approx 113 instructions)
+
+180 degree
+Computed in 8127568556 nanoseconds
+Time/Pixel: 163 nanoseconds (approx 163 instructions)
+
+Discussion: 
+In this program, many of the rotations acted as predicted in our implementation
+plan. For row major, as expected, the 180 degree and 0 degree rotations were
+the fastest overall times. This makes sense because of the limited chache writes
+required as specified in the implementation plan. Another notable trend is that 
+while overall col major mapping did the worst and row-major mapping did best, as
+predicted, the 90 degree row and column major mapping are similar because both
+are required to cache in similair ways as explained on our spec. Both
+having to access or place in both row and column major order. One slight 
+departure from our implementation plan's description is that the block major
+mapping was much slower than expected. However, the mapping was still faster 
+than column major in most cases and slower than row major in most cases. 
+
+Hours Spent: 35
